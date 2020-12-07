@@ -1,0 +1,40 @@
+<form [formGroup]="cidadeFilter">
+  <div style="margin-top:30px; padding-bottom:20px;" class="row">
+    <div class="col-md-4">
+      <span class="p-float-label">
+        <input style="width:100%;" id="float-input" formControlName="nomeCidade" type="text" pInputText>
+      <label for="float-input">Nome cidade</label>
+      </span>
+    </div>
+    <div class="col-md-2">
+      <p-dropdown [options]="comboEstados" formControlName="estado"  placeholder="Selecione o estado" optionLabel="descricao" [showClear]="true"></p-dropdown>
+    </div>
+    <div class="p-field p-col-3">
+      <span class="p-float-label">
+        <input style="width:100%;" size="50" id="float-input" formControlName="qtdHabitantes" type="number" pInputText>
+      <label for="float-input">Número de Habitantes</label>
+      </span>
+    </div>
+    <div class="col-md-1">
+      <button pButton pRipple [disabled]="!cidadeFilter.valid" (click)="adicionar()" label="Adicionar" ></button>
+    </div>
+  </div>
+</form>
+<p-table [value]="cidades">
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Cidade</th>
+          <th>Estado</th>
+          <th>Qtd.Habitantes</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-cidade>
+      <tr>
+          <td>{{cidade.descricao}}</td>
+          <td>{{cidade.nomeEstado}}</td>
+          <td>{{cidade.qtdCidadoes}}</td>
+      </tr>
+  </ng-template>
+</p-table>
+<button pButton pRipple class="buttonSubmit" (click)="salvarCidade()" label="Salvar" icon="pi pi-check"></button>
+<button pButton pRipple class="buttonSubmit" (click)="voltar()"  label="Voltar" icon="pi pi-arrow-left"></button>

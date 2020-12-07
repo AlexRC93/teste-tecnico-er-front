@@ -1,0 +1,26 @@
+<form [formGroup]="estadoFilter">
+  <div *ngFor="let estado of estados" class="p-field-checkbox">
+      <p-radioButton  [value]="estado" (click)="onRadioChange(estado)" [(ngModel)]="estadoSelecionado"   formControlName="estado"></p-radioButton>
+      <label  [for]="estado.id">{{estado.descricao}}</label>
+  </div>
+  <img *ngIf="estadoSelecionado != undefined" [src]="estadoSelecionado.bandeira" alt="Bandeira">
+  Total de habitantes : {{totalDeHabitantesPorEstadoSelecionado | number}} <br>
+  Custo total de habitantes : {{custoPorEstado | currency:'BRL'}}
+</form>
+<p-table [value]="cidades">
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Descrição</th>
+          <th>Habitantes</th>
+          <th>Ações</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-cidade>
+      <tr>
+          <td>{{cidade.descricao}}</td>
+          <td>{{cidade.qtdCidadoes | number: '1.0-0'}}</td>
+          <td><button pButton pRipple type="button" (click)="remover(cidade)" label="Remover" class="p-button-danger"></button></td>
+      </tr>
+  </ng-template>
+</p-table>
+<button style="margin-top:20px;" pButton pRipple (click)="navegar('cidades')" label="Cadastro" ></button>
